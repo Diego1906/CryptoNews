@@ -1,7 +1,8 @@
-package br.com.cryptonews
+package br.com.cryptonews.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import br.com.cryptonews.R
 
 class MainActivity : AppCompatActivity() {
 
