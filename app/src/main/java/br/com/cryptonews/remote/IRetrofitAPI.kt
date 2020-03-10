@@ -1,5 +1,6 @@
 package br.com.cryptonews.remote
 
+import br.com.cryptonews.entities.News
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -10,5 +11,5 @@ interface IRetrofitAPI {
         @Path("from") from: String,
         @Path("to") to: String,
         @Path("apiKey") apiKey: String
-    ): List<Any>
+    ): News
 }
