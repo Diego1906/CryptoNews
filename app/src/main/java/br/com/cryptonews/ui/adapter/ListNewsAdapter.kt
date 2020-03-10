@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.cryptonews.databinding.ItemListNewsBinding
 import br.com.cryptonews.entities.Article
 
-class ListNewsAdapter : ListAdapter<Article, ListNewsAdapter.ItemHolder>(DiffCallBack) {
+class ListNewsAdapter(val onClickListener: OnClickListener) :
+    ListAdapter<Article, ListNewsAdapter.ItemHolder>(DiffCallBack) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
         return ItemHolder.from(parent)
@@ -16,6 +17,9 @@ class ListNewsAdapter : ListAdapter<Article, ListNewsAdapter.ItemHolder>(DiffCal
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
         val article = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(article)
+        }
         holder.bind(article)
     }
 
@@ -44,5 +48,10 @@ class ListNewsAdapter : ListAdapter<Article, ListNewsAdapter.ItemHolder>(DiffCal
         override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
             return oldItem.title == newItem.title
         }
+    }
+
+    class OnClickListener(private val clickListener: (article: Article) -> Unit) {
+
+        fun onClick(article: Article) = clickListener(article)
     }
 }
