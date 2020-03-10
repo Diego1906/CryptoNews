@@ -1,82 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.cardview.widget.CardView
+    <data>
+
+        <variable
+            name="article"
+            type="br.com.cryptonews.entities.Article" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp">
+            android:layout_margin="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/imageNews"
-                android:layout_width="48dp"
-                android:layout_height="64dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@mipmap/ic_launcher" />
-
-            <TextView
-                android:id="@+id/labelDate"
-                android:layout_width="0dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:padding="2dp"
-                android:textAlignment="textEnd"
-                android:textSize="12sp"
-                android:textStyle="italic|bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/imageNews"
-                app:layout_constraintTop_toTopOf="@id/imageNews"
-                tools:text="Date" />
+                android:layout_margin="4dp">
 
-            <TextView
-                android:id="@+id/textDate"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="2dp"
-                android:textAlignment="textEnd"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/labelDate"
-                app:layout_constraintTop_toBottomOf="@id/labelDate"
-                tools:text="10/03/2020" />
+                <ImageView
+                    android:id="@+id/imageNews"
+                    android:layout_width="48dp"
+                    android:layout_height="64dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@mipmap/ic_launcher" />
 
-            <TextView
-                android:id="@+id/labelTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="2dp"
-                android:textSize="12sp"
-                android:textStyle="italic|bold"
-                app:layout_constraintBottom_toBottomOf="@id/imageNews"
-                app:layout_constraintEnd_toEndOf="@id/labelDate"
-                app:layout_constraintStart_toStartOf="@id/labelDate"
-                tools:text="Title" />
+                <TextView
+                    android:id="@+id/labelDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:padding="2dp"
+                    android:textAlignment="textEnd"
+                    android:textSize="12sp"
+                    android:textStyle="italic|bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imageNews"
+                    app:layout_constraintTop_toTopOf="@id/imageNews"
+                    tools:text="Date" />
 
-            <TextView
-                android:id="@+id/textTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:padding="2dp"
-                app:layout_constraintEnd_toEndOf="@id/labelTitle"
-                app:layout_constraintStart_toStartOf="@id/labelTitle"
-                app:layout_constraintTop_toBottomOf="@id/labelTitle"
-                tools:text="Crypto currency today is new valeu in the market international, with this news changes in the world." />
+                <TextView
+                    android:id="@+id/textDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:text="@{article.publishedAt}"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/labelDate"
+                    app:layout_constraintTop_toBottomOf="@id/labelDate"
+                    tools:text="10/03/2020" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/labelTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:textSize="12sp"
+                    android:textStyle="italic|bold"
+                    app:layout_constraintBottom_toBottomOf="@id/imageNews"
+                    app:layout_constraintEnd_toEndOf="@id/labelDate"
+                    app:layout_constraintStart_toStartOf="@id/labelDate"
+                    tools:text="Title" />
 
-    </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/textTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:padding="2dp"
+                    android:text="@{article.title}"
+                    app:layout_constraintEnd_toEndOf="@id/labelTitle"
+                    app:layout_constraintStart_toStartOf="@id/labelTitle"
+                    app:layout_constraintTop_toBottomOf="@id/labelTitle"
+                    tools:text="Crypto currency today is new valeu in the market international, with this news changes in the world." />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
