@@ -7,7 +7,6 @@ interface IRepository {
     suspend fun getRemoteListCryptoNews(
         qInTitle: String,
         dateFrom: String,
-        dateTo: String,
-        apiKey: String
+        dateTo: String
     ): News
 }

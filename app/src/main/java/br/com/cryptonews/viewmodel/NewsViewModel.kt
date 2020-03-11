@@ -11,6 +11,13 @@ import kotlinx.coroutines.*
 class NewsViewModel(val repository: IRepository, application: Application) :
     AndroidViewModel(application) {
 
+//    init {
+//        getRemoteListCryptoNews(
+//            QueryType.SHOW_ALL.value,
+//            "2020-03-01", "2020-03-10", BuildConfig.API_KEY
+//        )
+//    }
+
     val viewModelJob = Job()
     val uiScope by lazy {
         CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -37,7 +44,7 @@ class NewsViewModel(val repository: IRepository, application: Application) :
         get() = _toast
 
     fun getRemoteListCryptoNews(
-        qInTitle: String, dateFrom: String, dateTo: String, apiKey: String
+        qInTitle: String, dateFrom: String, dateTo: String
     ) {
         uiScope.launch {
             withContext(Dispatchers.IO) {
@@ -46,8 +53,7 @@ class NewsViewModel(val repository: IRepository, application: Application) :
                         repository.getRemoteListCryptoNews(
                             qInTitle,
                             dateFrom,
-                            dateTo,
-                            apiKey
+                            dateTo
                         )
                     )
                 } catch (ex: Exception) {
@@ -55,5 +61,14 @@ class NewsViewModel(val repository: IRepository, application: Application) :
                 }
             }
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
+
+    fun updateFilter(qInTitle: String, dateFrom: String, dateTo: String) {
+        getRemoteListCryptoNews(qInTitle, dateFrom, dateTo)
     }
 }

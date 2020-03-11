@@ -10,7 +10,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
-    viewModel { NewsViewModel(get(), androidApplication()) }
-    single<IRepository> { Repository(get()) }
+    viewModel { NewsViewModel(repository = get(), application = androidApplication()) }
+    single<IRepository> { Repository(service = get()) }
     single<IService> { RetrofitConfig() }
 }

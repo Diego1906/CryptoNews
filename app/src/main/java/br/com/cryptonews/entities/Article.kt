@@ -7,26 +7,26 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Article(
     @Json(name = "source")
-    val source: Source,
+    val source: Source?,
 
     @Json(name = "author")
-    val author: String,
+    val author: String?,
 
     @Json(name = "title")
-    val title: String,
+    val title: String?,
 
     @Json(name = "description")
-    val description: String,
+    val description: String?,
 
     @Json(name = "url")
-    val url: String,
+    val url: String?,
 
     @Json(name = "urlToImage")
-    val urlToImage: String,
+    val urlToImage: String?,
 
     @Json(name = "publishedAt")
-    val publishedAt: String,
+    val publishedAt: String?,
 
     @Json(name = "content")
-    val content: String
+    val content: String?
 ) : Parcelable

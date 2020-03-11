@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class News(
     @Json(name = "status")
-    val status: String,
+    val status: String?,
 
     @Json(name = "totalResults")
     val totalResults: Int,

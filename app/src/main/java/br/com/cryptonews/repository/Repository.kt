@@ -8,9 +8,8 @@ class Repository(val service: IService) : IRepository {
     override suspend fun getRemoteListCryptoNews(
         qInTitle: String,
         dateFrom: String,
-        dateTo: String,
-        apiKey: String
+        dateTo: String
     ): News {
-        return service.getService().getRemoteListCryptoNews(qInTitle, dateFrom, dateTo, apiKey)
+        return service.getService().getRemoteListCryptoNews(qInTitle, dateFrom, dateTo)
     }
 }
