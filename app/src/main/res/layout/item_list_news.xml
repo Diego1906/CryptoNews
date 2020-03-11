@@ -8,17 +8,21 @@
         <variable
             name="article"
             type="br.com.cryptonews.entities.Article" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
+            android:layout_marginStart="@dimen/dimen_8dp"
+            android:layout_marginTop="@dimen/dimen_6dp"
+            android:layout_marginEnd="@dimen/dimen_8dp"
+            android:layout_marginBottom="@dimen/dimen_6dp"
+            app:cardElevation="@dimen/dimen_6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -26,65 +30,95 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp">
+                android:layout_margin="@dimen/dimen_8dp">
 
                 <ImageView
                     android:id="@+id/imageNews"
-                    android:layout_width="48dp"
-                    android:layout_height="64dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:scaleType="centerCrop"
+                    app:downloadImage="@{article.urlToImage}"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:src="@mipmap/ic_launcher" />
 
                 <TextView
                     android:id="@+id/labelDate"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:padding="2dp"
-                    android:textAlignment="textEnd"
+                    android:gravity="end"
+                    android:padding="4dp"
+                    android:text="Date"
+                    android:textColor="@android:color/black"
                     android:textSize="12sp"
                     android:textStyle="italic|bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/imageNews"
-                    app:layout_constraintTop_toTopOf="@id/imageNews"
-                    tools:text="Date" />
+                    app:layout_constraintStart_toStartOf="@id/imageNews"
+                    app:layout_constraintTop_toBottomOf="@id/imageNews" />
+
+                <View
+                    android:id="@+id/viewDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginStart="@dimen/dimen_6dp"
+                    android:layout_marginEnd="@dimen/dimen_6dp"
+                    android:background="@android:color/darker_gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/labelDate" />
 
                 <TextView
                     android:id="@+id/textDate"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="2dp"
+                    android:gravity="end"
+                    android:padding="4dp"
                     android:text="@{article.publishedAt}"
-                    android:textAlignment="textEnd"
+                    android:textColor="@android:color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/labelDate"
-                    app:layout_constraintTop_toBottomOf="@id/labelDate"
+                    app:layout_constraintTop_toBottomOf="@id/viewDate"
                     tools:text="10/03/2020" />
 
                 <TextView
                     android:id="@+id/labelTitle"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="2dp"
+                    android:gravity="start"
+                    android:padding="4dp"
+                    android:text="Title"
+                    android:textColor="@android:color/black"
                     android:textSize="12sp"
                     android:textStyle="italic|bold"
-                    app:layout_constraintBottom_toBottomOf="@id/imageNews"
-                    app:layout_constraintEnd_toEndOf="@id/labelDate"
-                    app:layout_constraintStart_toStartOf="@id/labelDate"
-                    tools:text="Title" />
+                    app:layout_constraintEnd_toEndOf="@id/textDate"
+                    app:layout_constraintStart_toStartOf="@id/textDate"
+                    app:layout_constraintTop_toBottomOf="@id/textDate" />
+
+                <View
+                    android:id="@+id/viewTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginStart="@dimen/dimen_6dp"
+                    android:layout_marginEnd="@dimen/dimen_6dp"
+                    android:background="@android:color/darker_gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/labelTitle" />
 
                 <TextView
                     android:id="@+id/textTitle"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
+                    android:gravity="start"
                     android:maxLines="2"
-                    android:padding="2dp"
+                    android:padding="4dp"
                     android:text="@{article.title}"
+                    android:textColor="@android:color/black"
                     app:layout_constraintEnd_toEndOf="@id/labelTitle"
                     app:layout_constraintStart_toStartOf="@id/labelTitle"
-                    app:layout_constraintTop_toBottomOf="@id/labelTitle"
+                    app:layout_constraintTop_toBottomOf="@id/viewTitle"
                     tools:text="Crypto currency today is new valeu in the market international, with this news changes in the world." />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

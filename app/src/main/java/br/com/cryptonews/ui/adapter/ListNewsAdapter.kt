@@ -48,7 +48,7 @@ class ListNewsAdapter(/*val onClickListener: OnClickListener*/) :
         }
 
         override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
-            return oldItem.title == newItem.title
+            return oldItem.source?.id == newItem.source?.id
         }
     }
 

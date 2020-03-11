@@ -12,6 +12,7 @@ interface IRetrofitAPI {
         @Query("qInTitle") qInTitle: String,
         @Query("from") from: String,
         @Query("to") to: String,
+        @Query("sortBy") sortBy: String = "publishedAt",
         @Query("apiKey") apiKey: String = BuildConfig.API_KEY
     ): News
 }
