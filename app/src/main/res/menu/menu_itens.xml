@@ -3,27 +3,26 @@
     <group>
         <item
             android:id="@+id/crypto"
-            android:title="Show all crypto" />
+            android:title="@string/all_about_crypto" />
 
         <item
             android:id="@+id/bitcoin"
-            android:title="Bitcoin" />
+            android:title="@string/bitcoin" />
 
         <item
             android:id="@+id/bitcoinCash"
-            android:title="Bitcoin Cash" />
+            android:title="@string/bitcoin_cash" />
 
         <item
             android:id="@+id/ethereum"
-            android:title="Ethereum" />
+            android:title="@string/ethereum" />
 
         <item
             android:id="@+id/litecoin"
-            android:title="Litecoin" />
+            android:title="@string/litecoin" />
 
         <item
             android:id="@+id/ripple"
-            android:title="Ripple" />
+            android:title="@string/ripple" />
     </group>
-
 </menu>

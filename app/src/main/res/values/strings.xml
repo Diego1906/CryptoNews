@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">CryptoNews</string>
+    <string name="date">Date</string>
+    <string name="title">Title</string>
+    <string name="all_about_crypto">All about Crypto</string>
+    <string name="bitcoin">Bitcoin</string>
+    <string name="bitcoin_cash">Bitcoin Cash</string>
+    <string name="ethereum">Ethereum</string>
+    <string name="litecoin">Litecoin</string>
+    <string name="ripple">Ripple</string>
 </resources>
