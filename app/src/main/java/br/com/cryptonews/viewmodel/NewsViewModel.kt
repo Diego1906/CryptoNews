@@ -4,24 +4,16 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import br.com.cryptonews.entities.News
 import br.com.cryptonews.repository.IRepository
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class NewsViewModel(val repository: IRepository, application: Application) :
     AndroidViewModel(application) {
-
-//    init {
-//        getRemoteListCryptoNews(
-//            QueryType.SHOW_ALL.value,
-//            "2020-03-01", "2020-03-10", BuildConfig.API_KEY
-//        )
-//    }
-
-    val viewModelJob = Job()
-    val uiScope by lazy {
-        CoroutineScope(Dispatchers.Main + viewModelJob)
-    }
 
     private val _title = MutableLiveData<String>()
     val title: LiveData<String>
@@ -43,10 +35,14 @@ class NewsViewModel(val repository: IRepository, application: Application) :
     val toast: LiveData<String>
         get() = _toast
 
-    fun getRemoteListCryptoNews(
+    private val _progressBar = MutableLiveData<Boolean>()
+    val progressBar: LiveData<Boolean>
+        get() = _progressBar
+
+    fun onGetRemoteList(
         qInTitle: String, dateFrom: String, dateTo: String
     ) {
-        uiScope.launch {
+        viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 try {
                     _news.postValue(
@@ -56,19 +52,24 @@ class NewsViewModel(val repository: IRepository, application: Application) :
                             dateTo
                         )
                     )
-                } catch (ex: Exception) {
+                } catch (ex: Throwable) {
                     _toast.postValue("Falha ao buscar os dados: ${ex.message}")
                 }
             }
+            onShowProgressBar(false)
         }
     }
 
     override fun onCleared() {
         super.onCleared()
-        viewModelJob.cancel()
+        viewModelScope.cancel()
     }
 
-    fun updateFilter(qInTitle: String, dateFrom: String, dateTo: String) {
-        getRemoteListCryptoNews(qInTitle, dateFrom, dateTo)
+    fun onUpdateFilter(qInTitle: String, dateFrom: String, dateTo: String) {
+        onGetRemoteList(qInTitle, dateFrom, dateTo)
+    }
+
+    fun onShowProgressBar(value: Boolean) {
+        _progressBar.postValue(value)
     }
 }

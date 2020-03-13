@@ -8,4 +8,5 @@
     <string name="ethereum">Ethereum</string>
     <string name="litecoin">Litecoin</string>
     <string name="ripple">Ripple</string>
+    <string name="pattern_date_format">yyyy-MM-dd</string>
 </resources>

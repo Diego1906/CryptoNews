@@ -8,22 +8,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.cryptonews.R
 import br.com.cryptonews.databinding.FragmentNewsBinding
-import br.com.cryptonews.di.AppGlobal
-import br.com.cryptonews.remote.RetrofitConfig
-import br.com.cryptonews.repository.Repository
 import br.com.cryptonews.ui.adapter.ListNewsAdapter
+import br.com.cryptonews.util.DateNews
 import br.com.cryptonews.util.QueryType
+import br.com.cryptonews.util.onShowToast
 import br.com.cryptonews.viewmodel.NewsViewModel
 import kotlinx.android.synthetic.main.fragment_news.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 
 class NewsFragment : Fragment() {
 
-    private val viewModel by viewModel<NewsViewModel> {
-        parametersOf(Repository(RetrofitConfig()), AppGlobal())
-    }
+    private val viewModel by viewModel<NewsViewModel>()
     private val adapterNews by lazy { ListNewsAdapter() }
+    private val dateNews by lazy { DateNews(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +37,10 @@ class NewsFragment : Fragment() {
             it?.articles?.let {
                 adapterNews.submitList(it)
             }
+        })
+
+        viewModel.toast.observe(viewLifecycleOwner, Observer {
+            it?.onShowToast(requireContext())
         })
 
         return binding.root
@@ -68,7 +69,8 @@ class NewsFragment : Fragment() {
             else -> QueryType.SHOW_ALL.value
         }
 
-        viewModel.updateFilter(title, "2020-03-01", "2020-03-10")
+        viewModel.onShowProgressBar(true)
+        viewModel.onUpdateFilter(title, dateNews.from(), dateNews.to())
 
         return true
     }
