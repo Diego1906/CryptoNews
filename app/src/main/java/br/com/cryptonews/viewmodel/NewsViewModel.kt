@@ -39,9 +39,7 @@ class NewsViewModel(val repository: IRepository, application: Application) :
     val progressBar: LiveData<Boolean>
         get() = _progressBar
 
-    fun onGetRemoteList(
-        qInTitle: String, dateFrom: String, dateTo: String
-    ) {
+    private fun onGetRemoteList(qInTitle: String, dateFrom: String, dateTo: String) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 try {

@@ -14,6 +14,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        card_view:cardCornerRadius="@dimen/dimen_8dp"
         card_view:cardElevation="@dimen/dimen_6dp"
         card_view:cardUseCompatPadding="true"
         card_view:contentPadding="@dimen/dimen_8dp">

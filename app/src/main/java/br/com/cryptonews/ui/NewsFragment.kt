@@ -19,7 +19,13 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class NewsFragment : Fragment() {
 
     private val viewModel by viewModel<NewsViewModel>()
-    private val adapterNews by lazy { ListNewsAdapter() }
+
+    private val adapterNews by lazy {
+        ListNewsAdapter(ListNewsAdapter.OnClickListener {
+            it.author?.onShowToast(requireContext())
+        })
+    }
+
     private val dateNews by lazy { DateNews(requireContext()) }
 
     override fun onCreateView(
@@ -29,12 +35,12 @@ class NewsFragment : Fragment() {
 
         val binding = FragmentNewsBinding.inflate(inflater)
         binding.viewModel = viewModel
-        binding.setLifecycleOwner(viewLifecycleOwner)
+        binding.lifecycleOwner = viewLifecycleOwner
 
         setHasOptionsMenu(true)
 
-        viewModel.news.observe(viewLifecycleOwner, Observer {
-            it?.articles?.let {
+        viewModel.news.observe(viewLifecycleOwner, Observer { news ->
+            news?.articles?.let {
                 adapterNews.submitList(it)
             }
         })
