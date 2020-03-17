@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CryptoNews</string>
+    <string name="app_name">Crypto News</string>
     <string name="date">Date</string>
     <string name="title">Title</string>
     <string name="all_about_crypto">All about Crypto</string>
@@ -9,4 +9,8 @@
     <string name="litecoin">Litecoin</string>
     <string name="ripple">Ripple</string>
     <string name="pattern_date_format">yyyy-MM-dd</string>
+    <string name="description">Description</string>
+    <string name="author">Author</string>
+    <string name="learn_more">Learn More</string>
+    <string name="image_news_detail">Image news detail</string>
 </resources>

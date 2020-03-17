@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.cryptonews.R
@@ -22,7 +23,9 @@ class NewsFragment : Fragment() {
 
     private val adapterNews by lazy {
         ListNewsAdapter(ListNewsAdapter.OnClickListener {
-            it.author?.onShowToast(requireContext())
+            this.findNavController().navigate(
+                NewsFragmentDirections.actionNewsFragmentToDetailFragment(it)
+            )
         })
     }
 

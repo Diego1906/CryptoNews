@@ -10,5 +10,8 @@
 
     <!--SP-->
     <dimen name="dimen_12sp">12sp</dimen>
+    <dimen name="dimen_12dp">12dp</dimen>
+    <dimen name="dimen_250dp">250dp</dimen>
+    <dimen name="dimen_64dp">64dp</dimen>
 
 </resources>
