@@ -24,68 +24,51 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/imageNews"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_160dp"
-                android:scaleType="centerCrop"
-                app:downloadImage="@{article.urlToImage}"
-                app:layout_constraintEnd_toEndOf="parent"
+            <TextView
+                android:id="@+id/labelTitle"
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dimen_4dp"
+                android:text="@string/title"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/dimen_14sp"
+                android:textStyle="italic|bold"
+                app:layout_constraintEnd_toStartOf="@id/labelDate"
+                app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@mipmap/ic_launcher" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/labelDate"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:padding="@dimen/dimen_4dp"
                 android:text="@string/date"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/dimen_12sp"
+                android:textSize="@dimen/dimen_14sp"
                 android:textStyle="italic|bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/imageNews"
-                app:layout_constraintTop_toBottomOf="@id/imageNews" />
-
-            <View
-                android:id="@+id/viewDate"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_1dp"
-                android:background="@android:color/darker_gray"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/labelDate" />
+                app:layout_constraintEnd_toStartOf="@id/txtDate"
+                app:layout_constraintHorizontal_weight="2"
+                app:layout_constraintStart_toEndOf="@id/labelTitle"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textDate"
-                android:layout_width="match_parent"
+                android:id="@+id/txtDate"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:padding="@dimen/dimen_4dp"
                 android:text="@{article.publishedAt}"
                 android:textColor="@android:color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/labelDate"
-                app:layout_constraintTop_toBottomOf="@id/viewDate"
-                tools:text="10/03/2020" />
-
-            <TextView
-                android:id="@+id/labelTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:padding="@dimen/dimen_4dp"
-                android:text="@string/title"
-                android:textColor="@android:color/black"
                 android:textSize="@dimen/dimen_12sp"
-                android:textStyle="italic|bold"
-                app:layout_constraintEnd_toEndOf="@id/textDate"
-                app:layout_constraintStart_toStartOf="@id/textDate"
-                app:layout_constraintTop_toBottomOf="@id/textDate" />
+                app:layout_constraintBottom_toBottomOf="@id/labelDate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="2"
+                app:layout_constraintStart_toEndOf="@id/labelDate"
+                tools:text="10.03.2020 21:51:03" />
 
             <View
                 android:id="@+id/viewTitle"
@@ -98,18 +81,30 @@
 
             <TextView
                 android:id="@+id/textTitle"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:gravity="start"
                 android:maxLines="2"
                 android:padding="@dimen/dimen_4dp"
                 android:text="@{article.title}"
                 android:textColor="@android:color/black"
-                app:layout_constraintEnd_toEndOf="@id/labelTitle"
-                app:layout_constraintStart_toStartOf="@id/labelTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/viewTitle"
                 tools:text="As moedas digitais estão sacudinho o mundo e o mercado de compra e venda." />
+
+            <ImageView
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="@dimen/dimen_180dp"
+                android:layout_marginTop="@dimen/dimen_6dp"
+                android:contentDescription="@string/image_news_item"
+                android:scaleType="centerCrop"
+                app:downloadImage="@{article.urlToImage}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textTitle"
+                tools:src="@mipmap/ic_launcher" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
