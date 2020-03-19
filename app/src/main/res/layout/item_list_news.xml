@@ -8,7 +8,7 @@
 
         <variable
             name="article"
-            type="br.com.cryptonews.entities.Article" />
+            type="br.com.cryptonews.model.ArticleObject" />
     </data>
 
     <androidx.cardview.widget.CardView

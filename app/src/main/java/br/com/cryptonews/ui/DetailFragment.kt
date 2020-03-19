@@ -9,13 +9,13 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import br.com.cryptonews.databinding.FragmentDetailBinding
-import br.com.cryptonews.entities.Article
+import br.com.cryptonews.model.ArticleObject
 import br.com.cryptonews.viewmodel.DetailViewModel
 import kotlinx.android.synthetic.main.fragment_detail.*
 
 class DetailFragment : Fragment() {
 
-    private var article: Article? = null
+    private var article: ArticleObject? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

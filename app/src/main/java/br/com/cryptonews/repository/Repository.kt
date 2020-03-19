@@ -1,6 +1,7 @@
 package br.com.cryptonews.repository
 
-import br.com.cryptonews.entities.News
+import br.com.cryptonews.mapper.mapToObject
+import br.com.cryptonews.model.NewsObject
 import br.com.cryptonews.remote.IService
 
 class Repository(val service: IService) : IRepository {
@@ -9,7 +10,9 @@ class Repository(val service: IService) : IRepository {
         qInTitle: String,
         dateFrom: String,
         dateTo: String
-    ): News {
-        return service.getService().getRemoteListCryptoNews(qInTitle, dateFrom, dateTo)
+    ): NewsObject {
+        return service.getService()
+            .getRemoteListCryptoNews(qInTitle, dateFrom, dateTo)
+            .mapToObject()
     }
 }

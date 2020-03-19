@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import br.com.cryptonews.entities.News
+import br.com.cryptonews.model.NewsObject
 import br.com.cryptonews.repository.IRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -27,8 +27,8 @@ class NewsViewModel(val repository: IRepository, application: Application) :
     val publishedAt: LiveData<String>
         get() = _publishedAt
 
-    private val _news = MutableLiveData<News>()
-    val news: LiveData<News>
+    private val _news = MutableLiveData<NewsObject>()
+    val news: LiveData<NewsObject>
         get() = _news
 
     private val _toast = MutableLiveData<String>()

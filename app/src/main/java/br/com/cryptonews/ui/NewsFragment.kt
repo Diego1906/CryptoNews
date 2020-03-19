@@ -59,7 +59,6 @@ class NewsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerView?.apply {
             adapter = adapterNews
-            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         }
     }
 

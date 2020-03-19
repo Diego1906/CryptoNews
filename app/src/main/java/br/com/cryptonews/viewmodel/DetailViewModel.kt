@@ -4,12 +4,13 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import br.com.cryptonews.entities.Article
+import br.com.cryptonews.model.ArticleObject
 
-class DetailViewModel(article: Article, application: Application) : AndroidViewModel(application) {
+class DetailViewModel(article: ArticleObject, application: Application) :
+    AndroidViewModel(application) {
 
-    private val _article = MutableLiveData<Article>()
-    val article: LiveData<Article>
+    private val _article = MutableLiveData<ArticleObject>()
+    val article: LiveData<ArticleObject>
         get() = _article
 
     init {

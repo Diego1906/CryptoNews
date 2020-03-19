@@ -9,7 +9,7 @@
         android:id="@+id/newsFragment"
         android:name="br.com.cryptonews.ui.NewsFragment"
         android:label="fragment_news"
-        tools:layout="@layout/fragment_news" >
+        tools:layout="@layout/fragment_news">
         <action
             android:id="@+id/action_newsFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
@@ -18,9 +18,9 @@
         android:id="@+id/detailFragment"
         android:name="br.com.cryptonews.ui.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" >
+        tools:layout="@layout/fragment_detail">
         <argument
             android:name="article"
-            app:argType="br.com.cryptonews.entities.Article" />
+            app:argType="br.com.cryptonews.model.ArticleObject" />
     </fragment>
 </navigation>
