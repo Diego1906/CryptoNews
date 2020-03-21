@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -12,99 +11,60 @@
     </data>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/StyleCardView"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        card_view:cardCornerRadius="@dimen/dimen_8dp"
-        card_view:cardElevation="@dimen/dimen_6dp"
-        card_view:cardUseCompatPadding="true"
-        card_view:contentPadding="@dimen/dimen_8dp">
+        android:foreground="?android:attr/selectableItemBackground">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/labelTitle"
-                android:layout_width="@dimen/dimen_0dp"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/dimen_4dp"
-                android:text="@string/title"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/dimen_14sp"
-                android:textStyle="italic|bold"
-                app:layout_constraintEnd_toStartOf="@id/labelDate"
-                app:layout_constraintHorizontal_weight="1"
+                android:id="@+id/textTitle"
+                style="@style/StyleTextTitle"
+                android:text="@{article.title}"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="As moedas digitais estão sacudinho o mundo e o mercado de compra e venda." />
 
-            <TextView
-                android:id="@+id/labelDate"
-                android:layout_width="@dimen/dimen_0dp"
-                android:layout_height="wrap_content"
-                android:gravity="end"
-                android:padding="@dimen/dimen_4dp"
-                android:text="@string/date"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/dimen_14sp"
-                android:textStyle="italic|bold"
-                app:layout_constraintEnd_toStartOf="@id/txtDate"
-                app:layout_constraintHorizontal_weight="2"
-                app:layout_constraintStart_toEndOf="@id/labelTitle"
-                app:layout_constraintTop_toTopOf="parent" />
+            <include
+                android:id="@+id/view01"
+                style="@style/StyleIncludeView"
+                layout="@layout/view_separator"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textTitle" />
+
+            <ImageView
+                android:id="@+id/imageItem"
+                style="@style/StyleImage"
+                android:layout_height="160dp"
+                android:contentDescription="@string/image_news_item"
+                app:downloadImage="@{article.urlToImage}"
+                app:layout_constraintBottom_toTopOf="@id/view02"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view01"
+                tools:srcCompat="@drawable/ic_news" />
+
+            <include
+                android:id="@+id/view02"
+                style="@style/StyleIncludeViewWithMarginTop"
+                layout="@layout/view_separator"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageItem" />
 
             <TextView
                 android:id="@+id/txtDate"
-                android:layout_width="@dimen/dimen_0dp"
-                android:layout_height="wrap_content"
-                android:gravity="end"
-                android:padding="@dimen/dimen_4dp"
+                style="@style/StyleTextDate"
                 android:text="@{article.publishedAt}"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/dimen_12sp"
-                app:layout_constraintBottom_toBottomOf="@id/labelDate"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_weight="2"
-                app:layout_constraintStart_toEndOf="@id/labelDate"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view02"
                 tools:text="10.03.2020 21:51:03" />
-
-            <View
-                android:id="@+id/viewTitle"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_1dp"
-                android:background="@android:color/darker_gray"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/labelTitle" />
-
-            <TextView
-                android:id="@+id/textTitle"
-                android:layout_width="@dimen/dimen_0dp"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:padding="@dimen/dimen_4dp"
-                android:text="@{article.title}"
-                android:textColor="@android:color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/viewTitle"
-                tools:text="As moedas digitais estão sacudinho o mundo e o mercado de compra e venda." />
-
-            <ImageView
-                android:layout_width="@dimen/dimen_0dp"
-                android:layout_height="@dimen/dimen_180dp"
-                android:layout_marginTop="@dimen/dimen_6dp"
-                android:contentDescription="@string/image_news_item"
-                android:scaleType="centerCrop"
-                app:downloadImage="@{article.urlToImage}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textTitle"
-                tools:src="@mipmap/ic_launcher" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
