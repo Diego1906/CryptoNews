@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import br.com.cryptonews.R
 import br.com.cryptonews.databinding.FragmentNewsBinding
+import br.com.cryptonews.model.ArticleObject
 import br.com.cryptonews.ui.adapter.ListNewsAdapter
 import br.com.cryptonews.util.DateNews
 import br.com.cryptonews.util.QueryType
@@ -18,6 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class NewsFragment : Fragment() {
 
     private val viewModel by viewModel<NewsViewModel>()
+    private var listNews: List<ArticleObject>? = null
 
     private val adapterNews by lazy {
         ListNewsAdapter(ListNewsAdapter.OnClickListener {
@@ -27,7 +29,9 @@ class NewsFragment : Fragment() {
         })
     }
 
-    private val dateNews by lazy { DateNews(requireContext()) }
+    private val dateNews by lazy {
+        DateNews(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +46,7 @@ class NewsFragment : Fragment() {
 
         viewModel.news.observe(viewLifecycleOwner, Observer { news ->
             news?.articles?.let {
+                listNews = it
                 adapterNews.submitList(it)
             }
         })
@@ -49,6 +54,9 @@ class NewsFragment : Fragment() {
         viewModel.toast.observe(viewLifecycleOwner, Observer {
             it?.onShowToast(requireContext())
         })
+
+        if (listNews.isNullOrEmpty())
+            onShowData()
 
         return binding.root
     }
@@ -75,9 +83,13 @@ class NewsFragment : Fragment() {
             else -> QueryType.SHOW_ALL.value
         }
 
-        viewModel.onShowProgressBar(true)
-        viewModel.onUpdateFilter(title, dateNews.from(), dateNews.to())
+        onShowData(title)
 
         return true
+    }
+
+    private fun onShowData(title: String = QueryType.SHOW_ALL.value) {
+        viewModel.onShowProgressBar(true)
+        viewModel.onUpdateFilter(title, dateNews.from(), dateNews.to())
     }
 }
