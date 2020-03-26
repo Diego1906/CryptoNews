@@ -3,8 +3,8 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimaryBlue900</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkBlue900</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
@@ -14,7 +14,7 @@
         <item name="cardUseCompatPadding">true</item>
         <item name="contentPadding">@dimen/dimen_6dp</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
     </style>
 
     <style name="StyleTextTitle">
@@ -25,7 +25,7 @@
         <item name="android:maxLines">2</item>
         <item name="android:padding">@dimen/dimen_4dp</item>
         <item name="android:textColor">@android:color/black</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/dimen_16sp</item>
     </style>
 
     <style name="StyleIncludeView">
@@ -42,7 +42,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">end</item>
         <item name="android:padding">@dimen/dimen_4dp</item>
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">@color/colorGray700</item>
     </style>
 
     <style name="StyleImage">

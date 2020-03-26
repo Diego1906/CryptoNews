@@ -6,5 +6,5 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_1dp"
-        android:background="@android:color/darker_gray" />
+        android:background="@color/colorGray300" />
 </FrameLayout>
