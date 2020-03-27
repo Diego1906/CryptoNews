@@ -2,27 +2,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/crypto"
+            android:id="@+id/nav_item_carros_todos"
+            android:checked="true"
             android:title="@string/all_about_crypto" />
 
         <item
-            android:id="@+id/bitcoin"
+            android:id="@+id/nav_item_carros_classicos"
             android:title="@string/bitcoin" />
 
         <item
-            android:id="@+id/bitcoinCash"
+            android:id="@+id/nav_item_carros_esportivos"
             android:title="@string/bitcoin_cash" />
 
         <item
-            android:id="@+id/ethereum"
+            android:id="@+id/nav_item_carros_luxo"
             android:title="@string/ethereum" />
 
         <item
-            android:id="@+id/litecoin"
+            android:id="@+id/nav_item_site_livro"
             android:title="@string/litecoin" />
 
         <item
-            android:id="@+id/ripple"
-            android:title="@string/ripple" />
+            android:id="@+id/nav_item_settings"
+            android:title="@string/title" />
     </group>
 </menu>

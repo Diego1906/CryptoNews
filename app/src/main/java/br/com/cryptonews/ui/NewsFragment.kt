@@ -2,6 +2,9 @@ package br.com.cryptonews.ui
 
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -13,13 +16,18 @@ import br.com.cryptonews.util.DateNews
 import br.com.cryptonews.util.QueryType
 import br.com.cryptonews.util.onShowToast
 import br.com.cryptonews.viewmodel.NewsViewModel
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.fragment_news.*
+import kotlinx.android.synthetic.main.include_toolbar.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class NewsFragment : Fragment() {
+class NewsFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener {
 
     private val viewModel by viewModel<NewsViewModel>()
     private var listNews: List<ArticleObject>? = null
+
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navigationView: NavigationView
 
     private val adapterNews by lazy {
         ListNewsAdapter(ListNewsAdapter.OnClickListener {
@@ -58,6 +66,9 @@ class NewsFragment : Fragment() {
         if (listNews.isNullOrEmpty())
             onShowData()
 
+        drawerLayout = requireActivity().findViewById(R.id.drawer_layout)
+        navigationView = requireActivity().findViewById(R.id.nav_view)
+
         return binding.root
     }
 
@@ -66,6 +77,7 @@ class NewsFragment : Fragment() {
         recyclerView?.apply {
             adapter = adapterNews
         }
+        setupNavDrawer()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -74,6 +86,17 @@ class NewsFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        onItemSelected(item)
+        return true
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        onItemSelected(item)
+        drawerLayout.closeDrawer(GravityCompat.START)
+        return true
+    }
+
+    private fun onItemSelected(item: MenuItem) {
         val title = when (item.itemId) {
             R.id.bitcoin -> QueryType.BITCOIN.value
             R.id.bitcoinCash -> QueryType.BITCOIN_CASH.value
@@ -82,14 +105,25 @@ class NewsFragment : Fragment() {
             R.id.ripple -> QueryType.RIPPLE.value
             else -> QueryType.SHOW_ALL.value
         }
-
         onShowData(title)
-
-        return true
     }
 
     private fun onShowData(title: String = QueryType.SHOW_ALL.value) {
         viewModel.onShowProgressBar(true)
         viewModel.onUpdateFilter(title, dateNews.from(), dateNews.to())
+    }
+
+    private fun setupNavDrawer() {
+        val toggle = ActionBarDrawerToggle(
+            this.requireActivity(),
+            drawerLayout,
+            toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        navigationView.setNavigationItemSelectedListener(this)
     }
 }

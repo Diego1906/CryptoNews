@@ -14,4 +14,7 @@
     <string name="learn_more">Learn More</string>
     <string name="image_news_detail">Image news detail</string>
     <string name="image_news_item">Image news item</string>
+
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
 </resources>

@@ -2,6 +2,10 @@ package br.com.cryptonews.util
 
 import android.content.Context
 import android.widget.Toast
+import androidx.annotation.IdRes
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -20,4 +24,22 @@ fun String.onDateFormat(): String? {
     return parser.parse(this)?.run {
         formatter.format(this)
     }
+}
+
+
+// Configura a Toolbar
+fun AppCompatActivity.setupToolbar(
+    @IdRes id: Int,
+    title: String? = null,
+    upNavigation: Boolean = false
+): ActionBar {
+    val toolbar = findViewById<Toolbar>(id)
+    setSupportActionBar(toolbar)
+
+    if (title != null) {
+        supportActionBar?.title = title
+    }
+    supportActionBar?.setDisplayHomeAsUpEnabled(upNavigation)
+
+    return supportActionBar!!
 }
