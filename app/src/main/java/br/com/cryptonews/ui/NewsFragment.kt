@@ -15,6 +15,7 @@ import br.com.cryptonews.ui.adapter.ListNewsAdapter
 import br.com.cryptonews.util.DateNews
 import br.com.cryptonews.util.QueryType
 import br.com.cryptonews.util.onShowToast
+import br.com.cryptonews.util.setupToolbar
 import br.com.cryptonews.viewmodel.NewsViewModel
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.fragment_news.*
@@ -39,6 +40,11 @@ class NewsFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
 
     private val dateNews by lazy {
         DateNews(requireContext())
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        setupToolbar(R.id.toolbar, getString(R.string.app_name))
     }
 
     override fun onCreateView(

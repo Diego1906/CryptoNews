@@ -6,6 +6,7 @@ import androidx.annotation.IdRes
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -27,7 +28,6 @@ fun String.onDateFormat(): String? {
 }
 
 
-// Configura a Toolbar
 fun AppCompatActivity.setupToolbar(
     @IdRes id: Int,
     title: String? = null,
@@ -42,4 +42,22 @@ fun AppCompatActivity.setupToolbar(
     supportActionBar?.setDisplayHomeAsUpEnabled(upNavigation)
 
     return supportActionBar!!
+}
+
+fun Fragment.setupToolbar(
+    @IdRes id: Int,
+    title: String? = null,
+    upNavigation: Boolean = false
+): ActionBar {
+    val activity = (activity as? AppCompatActivity)
+
+    val toolbar = activity?.findViewById<Toolbar>(id)
+    activity?.setSupportActionBar(toolbar)
+
+    if (title != null) {
+        activity?.supportActionBar?.title = title
+    }
+    activity?.supportActionBar?.setDisplayHomeAsUpEnabled(upNavigation)
+
+    return activity?.supportActionBar!!
 }
