@@ -11,6 +11,7 @@ import br.com.cryptonews.model.ArticleObject
 import br.com.cryptonews.ui.adapter.ListNewsAdapter
 import br.com.cryptonews.util.DateNews
 import br.com.cryptonews.util.QueryType
+import br.com.cryptonews.util.onIsNetworkConnected
 import br.com.cryptonews.util.onShowToast
 import br.com.cryptonews.viewmodel.NewsViewModel
 import kotlinx.android.synthetic.main.fragment_news.*
@@ -23,6 +24,7 @@ class NewsFragment : Fragment() {
 
     private val adapterNews by lazy {
         ListNewsAdapter(ListNewsAdapter.OnClickListener {
+            viewModel.onShowToast(null)
             this.findNavController().navigate(
                 NewsFragmentDirections.actionNewsFragmentToDetailFragment(it)
             )
@@ -89,6 +91,10 @@ class NewsFragment : Fragment() {
     }
 
     private fun onShowData(title: String = QueryType.SHOW_ALL.value) {
+        if (!onIsNetworkConnected()) {
+            viewModel.onShowToast(getString(R.string.no_connection_internet))
+            return
+        }
         viewModel.onShowProgressBar(true)
         viewModel.onUpdateFilter(title, dateNews.from(), dateNews.to())
     }

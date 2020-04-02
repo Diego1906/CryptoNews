@@ -1,7 +1,9 @@
 package br.com.cryptonews.util
 
 import android.content.Context
+import android.net.ConnectivityManager
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -17,7 +19,14 @@ fun String.onDateFormat(): String? {
 
     val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.getDefault())
 
-    return parser.parse(this)?.run {
+    val date = parser.parse(this)
+
+    return date?.run {
         formatter.format(this)
     }
+}
+
+fun Fragment.onIsNetworkConnected(): Boolean {
+    val cm = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    return cm.activeNetworkInfo?.isConnectedOrConnecting == true
 }

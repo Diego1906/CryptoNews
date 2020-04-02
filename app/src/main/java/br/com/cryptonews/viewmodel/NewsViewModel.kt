@@ -15,18 +15,6 @@ import kotlinx.coroutines.withContext
 class NewsViewModel(val repository: IRepository, application: Application) :
     AndroidViewModel(application) {
 
-    private val _title = MutableLiveData<String>()
-    val title: LiveData<String>
-        get() = _title
-
-    private val _urlToImage = MutableLiveData<String>()
-    val urlToImage: LiveData<String>
-        get() = _urlToImage
-
-    private val _publishedAt = MutableLiveData<String>()
-    val publishedAt: LiveData<String>
-        get() = _publishedAt
-
     private val _news = MutableLiveData<NewsObject>()
     val news: LiveData<NewsObject>
         get() = _news
@@ -51,7 +39,7 @@ class NewsViewModel(val repository: IRepository, application: Application) :
                         )
                     )
                 } catch (ex: Throwable) {
-                    _toast.postValue("Falha ao buscar os dados: ${ex.message}")
+                    onShowToast("Falha ao buscar os dados: ${ex.message}")
                 }
             }
             onShowProgressBar(false)
@@ -69,5 +57,9 @@ class NewsViewModel(val repository: IRepository, application: Application) :
 
     fun onShowProgressBar(value: Boolean) {
         _progressBar.postValue(value)
+    }
+
+    fun onShowToast(value: String?) {
+        _toast.postValue(value)
     }
 }
