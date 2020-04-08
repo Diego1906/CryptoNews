@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import br.com.cryptonews.R
 import br.com.cryptonews.model.NewsObject
 import br.com.cryptonews.repository.IRepository
 import kotlinx.coroutines.Dispatchers
@@ -27,32 +28,9 @@ class NewsViewModel(val repository: IRepository, application: Application) :
     val progressBar: LiveData<Boolean>
         get() = _progressBar
 
-    private fun onGetRemoteList(qInTitle: String, dateFrom: String, dateTo: String) {
-        viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                try {
-                    _news.postValue(
-                        repository.getRemoteListCryptoNews(
-                            qInTitle,
-                            dateFrom,
-                            dateTo
-                        )
-                    )
-                } catch (ex: Throwable) {
-                    onShowToast("Falha ao buscar os dados: ${ex.message}")
-                }
-            }
-            onShowProgressBar(false)
-        }
-    }
-
     override fun onCleared() {
         super.onCleared()
         viewModelScope.cancel()
-    }
-
-    fun onUpdateFilter(qInTitle: String, dateFrom: String, dateTo: String) {
-        onGetRemoteList(qInTitle, dateFrom, dateTo)
     }
 
     fun onShowProgressBar(value: Boolean) {
@@ -61,5 +39,28 @@ class NewsViewModel(val repository: IRepository, application: Application) :
 
     fun onShowToast(value: String?) {
         _toast.postValue(value)
+    }
+
+    fun onShowData(title: String, dateFrom: String, dateTo: String) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                try {
+                    _news.postValue(
+                        repository.getRemoteListCryptoNews(
+                            title,
+                            dateFrom,
+                            dateTo
+                        )
+                    )
+                } catch (ex: Throwable) {
+                    onShowToast(
+                        getApplication<Application>().getString(
+                            R.string.searching_data_fail, ex.message
+                        )
+                    )
+                }
+            }
+            onShowProgressBar(false)
+        }
     }
 }

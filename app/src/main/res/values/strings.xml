@@ -15,4 +15,5 @@
     <string name="image_news_detail">Image news detail</string>
     <string name="image_news_item">Image news item</string>
     <string name="no_connection_internet">Sem conexão com a internet</string>
+    <string name="searching_data_fail">Falha ao buscar os dados: %s</string>
 </resources>

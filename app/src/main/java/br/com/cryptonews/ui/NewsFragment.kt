@@ -21,6 +21,7 @@ class NewsFragment : Fragment() {
 
     private val viewModel by viewModel<NewsViewModel>()
     private var listNews: List<ArticleObject>? = null
+    private var filterTitle: String = QueryType.SHOW_ALL.value
 
     private val adapterNews by lazy {
         ListNewsAdapter(ListNewsAdapter.OnClickListener {
@@ -58,7 +59,7 @@ class NewsFragment : Fragment() {
         })
 
         if (listNews.isNullOrEmpty())
-            onShowData()
+            onShowData(filterTitle)
 
         return binding.root
     }
@@ -68,6 +69,9 @@ class NewsFragment : Fragment() {
         recyclerView?.apply {
             adapter = adapterNews
         }
+        swipeRefresh.setOnRefreshListener {
+            onShowData(filterTitle)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -76,7 +80,7 @@ class NewsFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val title = when (item.itemId) {
+        filterTitle = when (item.itemId) {
             R.id.bitcoin -> QueryType.BITCOIN.value
             R.id.bitcoinCash -> QueryType.BITCOIN_CASH.value
             R.id.ethereum -> QueryType.ETHEREUM.value
@@ -84,18 +88,24 @@ class NewsFragment : Fragment() {
             R.id.ripple -> QueryType.RIPPLE.value
             else -> QueryType.SHOW_ALL.value
         }
-
-        onShowData(title)
-
+        onShowData(filterTitle)
         return true
     }
 
-    private fun onShowData(title: String = QueryType.SHOW_ALL.value) {
+    private fun onShowData(filterTitle: String) {
         if (!onIsNetworkConnected()) {
             viewModel.onShowToast(getString(R.string.no_connection_internet))
+            onHideRefresh()
             return
         }
         viewModel.onShowProgressBar(true)
-        viewModel.onUpdateFilter(title, dateNews.from(), dateNews.to())
+        viewModel.onShowData(filterTitle, dateNews.from(), dateNews.to())
+        onHideRefresh()
+    }
+
+    private fun onHideRefresh() {
+        swipeRefresh?.let {
+            swipeRefresh.isRefreshing = false
+        }
     }
 }

@@ -23,7 +23,7 @@ class DetailFragment : Fragment() {
     ): View? {
 
         val viewModel = DetailViewModel(
-            DetailFragmentArgs.fromBundle(arguments!!).article,
+            DetailFragmentArgs.fromBundle(requireArguments()).article,
             requireNotNull(activity).application
         )
 
