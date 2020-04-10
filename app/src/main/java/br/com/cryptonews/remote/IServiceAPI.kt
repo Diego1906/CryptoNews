@@ -1,11 +1,11 @@
 package br.com.cryptonews.remote
 
 import br.com.cryptonews.BuildConfig
-import br.com.cryptonews.entities.News
+import br.com.cryptonews.remote.dto.News
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface IRetrofitAPI {
+interface IServiceAPI {
 
     @GET("everything")
     suspend fun getRemoteListCryptoNews(

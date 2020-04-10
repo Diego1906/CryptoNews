@@ -1,4 +1,4 @@
-package br.com.cryptonews.entities
+package br.com.cryptonews.remote.dto
 
 import android.os.Parcelable
 import com.squareup.moshi.Json

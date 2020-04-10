@@ -6,7 +6,12 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-class RetrofitConfig : IService {
+interface IService {
+
+    fun getService(): IServiceAPI
+}
+
+class Service : IService {
 
     private val retrofit: Retrofit
 
@@ -21,7 +26,7 @@ class RetrofitConfig : IService {
             .build()
     }
 
-    override fun getService(): IRetrofitAPI {
-        return retrofit.create(IRetrofitAPI::class.java)
+    override fun getService(): IServiceAPI {
+        return retrofit.create(IServiceAPI::class.java)
     }
 }

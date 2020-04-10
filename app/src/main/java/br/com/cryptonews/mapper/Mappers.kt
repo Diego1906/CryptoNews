@@ -3,9 +3,9 @@ package br.com.cryptonews.mapper
 import br.com.cryptonews.domain.ArticleModel
 import br.com.cryptonews.domain.NewsModel
 import br.com.cryptonews.domain.SourceModel
-import br.com.cryptonews.entities.Article
-import br.com.cryptonews.entities.News
-import br.com.cryptonews.entities.Source
+import br.com.cryptonews.remote.dto.Article
+import br.com.cryptonews.remote.dto.News
+import br.com.cryptonews.remote.dto.Source
 import br.com.cryptonews.util.onDateFormat
 
 fun News.mapToModel() = NewsModel(
