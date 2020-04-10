@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.cryptonews.databinding.ItemListNewsBinding
-import br.com.cryptonews.model.ArticleObject
+import br.com.cryptonews.domain.ArticleModel
 
-class ListNewsAdapter(val onClickListener: OnClickListener) :
-    ListAdapter<ArticleObject, ListNewsAdapter.ItemHolder>(DiffCallBack) {
+class ListNewsAdapter(private val onClickListener: OnClickListener) :
+    ListAdapter<ArticleModel, ListNewsAdapter.ItemHolder>(DiffCallBack) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
         return ItemHolder.from(parent)
@@ -26,7 +26,7 @@ class ListNewsAdapter(val onClickListener: OnClickListener) :
     class ItemHolder private constructor(private var view: ItemListNewsBinding) :
         RecyclerView.ViewHolder(view.root) {
 
-        fun bind(article: ArticleObject) {
+        fun bind(article: ArticleModel) {
             view.article = article
             view.executePendingBindings()
         }
@@ -40,17 +40,17 @@ class ListNewsAdapter(val onClickListener: OnClickListener) :
         }
     }
 
-    companion object DiffCallBack : DiffUtil.ItemCallback<ArticleObject>() {
-        override fun areItemsTheSame(oldItem: ArticleObject, newItem: ArticleObject): Boolean {
+    object DiffCallBack : DiffUtil.ItemCallback<ArticleModel>() {
+        override fun areItemsTheSame(oldItem: ArticleModel, newItem: ArticleModel): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: ArticleObject, newItem: ArticleObject): Boolean {
+        override fun areContentsTheSame(oldItem: ArticleModel, newItem: ArticleModel): Boolean {
             return (oldItem.source?.id == newItem.source?.id && oldItem.title == newItem.title)
         }
     }
 
-    class OnClickListener(private val clickListener: (article: ArticleObject) -> Unit) {
-        fun onClick(article: ArticleObject) = clickListener(article)
+    class OnClickListener(private val clickListener: (article: ArticleModel) -> Unit) {
+        fun onClick(article: ArticleModel) = clickListener(article)
     }
 }

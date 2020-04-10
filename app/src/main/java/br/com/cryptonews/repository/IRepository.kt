@@ -1,6 +1,6 @@
 package br.com.cryptonews.repository
 
-import br.com.cryptonews.model.NewsObject
+import br.com.cryptonews.domain.NewsModel
 
 interface IRepository {
 
@@ -8,5 +8,5 @@ interface IRepository {
         qInTitle: String,
         dateFrom: String,
         dateTo: String
-    ): NewsObject
+    ): NewsModel
 }

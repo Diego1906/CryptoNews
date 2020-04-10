@@ -1,16 +1,14 @@
 package br.com.cryptonews.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import br.com.cryptonews.model.ArticleObject
+import androidx.lifecycle.ViewModel
+import br.com.cryptonews.domain.ArticleModel
 
-class DetailViewModel(article: ArticleObject, application: Application) :
-    AndroidViewModel(application) {
+class DetailViewModel(article: ArticleModel) : ViewModel() {
 
-    private val _article = MutableLiveData<ArticleObject>()
-    val article: LiveData<ArticleObject>
+    private val _article = MutableLiveData<ArticleModel>()
+    val article: LiveData<ArticleModel>
         get() = _article
 
     init {

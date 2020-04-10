@@ -9,31 +9,30 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import br.com.cryptonews.databinding.FragmentDetailBinding
-import br.com.cryptonews.model.ArticleObject
+import br.com.cryptonews.domain.ArticleModel
 import br.com.cryptonews.viewmodel.DetailViewModel
 import kotlinx.android.synthetic.main.fragment_detail.*
 
 class DetailFragment : Fragment() {
 
-    private var article: ArticleObject? = null
+    private lateinit var article: ArticleModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val viewModel = DetailViewModel(
-            DetailFragmentArgs.fromBundle(requireArguments()).article,
-            requireNotNull(activity).application
+            DetailFragmentArgs.fromBundle(requireArguments()).article
         )
 
         val binding = FragmentDetailBinding.inflate(inflater)
-
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
         viewModel.article.observe(viewLifecycleOwner, Observer {
-            article = it
+            it?.let {
+                article = it
+            }
         })
 
         return binding.root
@@ -43,12 +42,10 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         buttonLearnMore.setOnClickListener {
-            article?.let { obj ->
-                Intent(Intent.ACTION_VIEW, obj.url?.toUri()).run {
-                    activity?.packageManager?.let { pm ->
-                        this.resolveActivity(pm)?.let {
-                            startActivity(this)
-                        }
+            Intent(Intent.ACTION_VIEW, article.url?.toUri()).run {
+                activity?.packageManager?.let { pm ->
+                    resolveActivity(pm)?.let {
+                        startActivity(this)
                     }
                 }
             }

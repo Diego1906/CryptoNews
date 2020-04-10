@@ -7,11 +7,11 @@
 
         <variable
             name="article"
-            type="br.com.cryptonews.model.ArticleObject" />
+            type="br.com.cryptonews.domain.ArticleModel" />
     </data>
 
     <androidx.cardview.widget.CardView
-        style="@style/StyleCardView"
+        style="@style/StyleCardViewItemList"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground">

@@ -25,6 +25,6 @@
         tools:layout="@layout/fragment_detail">
         <argument
             android:name="article"
-            app:argType="br.com.cryptonews.model.ArticleObject" />
+            app:argType="br.com.cryptonews.domain.ArticleModel" />
     </fragment>
 </navigation>

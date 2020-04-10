@@ -4,6 +4,8 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import br.com.cryptonews.CryptoNewsApplication
+import br.com.cryptonews.R
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -12,17 +14,24 @@ fun String.onShowToast(context: Context) {
 }
 
 fun String.onDateFormat(): String? {
-    val parser =
-        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH).apply {
-            this.setTimeZone(TimeZone.getTimeZone("GMT"))
-        }
+    val context = CryptoNewsApplication.getContext()
 
-    val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.getDefault())
+    val dateParser = SimpleDateFormat(
+        context.getString(R.string.pattern_date_api),
+        Locale.ENGLISH
+    ).apply {
+        timeZone = TimeZone.getTimeZone(context.getString(R.string.time_zone_gmt))
+    }
 
-    val date = parser.parse(this)
+    val dateFormatter = SimpleDateFormat(
+        context.getString(R.string.pattern_date_pt_br),
+        Locale.getDefault()
+    )
+
+    val date = dateParser.parse(this)
 
     return date?.run {
-        formatter.format(this)
+        dateFormatter.format(this)
     }
 }
 

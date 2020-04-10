@@ -7,7 +7,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import br.com.cryptonews.R
 import br.com.cryptonews.databinding.FragmentNewsBinding
-import br.com.cryptonews.model.ArticleObject
 import br.com.cryptonews.ui.adapter.ListNewsAdapter
 import br.com.cryptonews.util.DateNews
 import br.com.cryptonews.util.QueryType
@@ -19,10 +18,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NewsFragment : Fragment() {
 
-    private val viewModel by viewModel<NewsViewModel>()
-    private var listNews: List<ArticleObject>? = null
-    private var filterTitle: String = QueryType.SHOW_ALL.value
-
+    private var filterTitle: String? = null
+    private val viewModel: NewsViewModel by viewModel()
+    private val dateNews by lazy { DateNews(requireContext()) }
     private val adapterNews by lazy {
         ListNewsAdapter(ListNewsAdapter.OnClickListener {
             viewModel.onShowToast(null)
@@ -32,46 +30,28 @@ class NewsFragment : Fragment() {
         })
     }
 
-    private val dateNews by lazy {
-        DateNews(requireContext())
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val binding = FragmentNewsBinding.inflate(inflater)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.recyclerView.adapter = adapterNews
+        binding.swipeRefresh.setOnRefreshListener { onShowData(filterTitle) }
 
         setHasOptionsMenu(true)
-
-        viewModel.news.observe(viewLifecycleOwner, Observer { news ->
-            news?.articles?.let {
-                listNews = it
-                adapterNews.submitList(it)
-            }
-        })
 
         viewModel.toast.observe(viewLifecycleOwner, Observer {
             it?.onShowToast(requireContext())
         })
 
-        if (listNews.isNullOrEmpty())
+        if (filterTitle.isNullOrEmpty()) {
+            filterTitle = QueryType.SHOW_ALL.value
             onShowData(filterTitle)
+        }
 
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        recyclerView?.apply {
-            adapter = adapterNews
-        }
-        swipeRefresh.setOnRefreshListener {
-            onShowData(filterTitle)
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -92,14 +72,17 @@ class NewsFragment : Fragment() {
         return true
     }
 
-    private fun onShowData(filterTitle: String) {
+    private fun onShowData(title: String?) {
         if (!onIsNetworkConnected()) {
             viewModel.onShowToast(getString(R.string.no_connection_internet))
             onHideRefresh()
             return
         }
+
         viewModel.onShowProgressBar(true)
-        viewModel.onShowData(filterTitle, dateNews.from(), dateNews.to())
+        title?.let {
+            viewModel.onShowData(it, dateNews.from(), dateNews.to())
+        }
         onHideRefresh()
     }
 
