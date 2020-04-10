@@ -46,11 +46,7 @@ class NewsViewModel(val repository: IRepository, application: Application) :
             withContext(Dispatchers.IO) {
                 try {
                     _news.postValue(
-                        repository.getRemoteListCryptoNews(
-                            title,
-                            dateFrom,
-                            dateTo
-                        )
+                        repository.getRemoteListCryptoNews(title, dateFrom, dateTo)
                     )
                 } catch (ex: Throwable) {
                     onShowToast(

@@ -8,10 +8,3 @@ enum class QueryType(val value: String) {
     RIPPLE("ripple"),
     SHOW_ALL("crypto")
 }
-
-enum class NewsApiStatus {
-    LOADING,
-    ERROR,
-    DONE,
-    NO_INTERNET_CONNECTION
-}

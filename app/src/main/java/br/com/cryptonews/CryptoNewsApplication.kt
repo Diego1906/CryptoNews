@@ -18,6 +18,7 @@ class CryptoNewsApplication : Application() {
     }
 
     companion object {
+
         private lateinit var INSTANCE: Context
 
         fun setContext(context: Context) {

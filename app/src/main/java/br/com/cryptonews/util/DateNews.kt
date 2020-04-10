@@ -9,11 +9,11 @@ private const val DAYS_AGO = -20
 
 class DateNews(context: Context) {
 
-    private val simpleDateFormat =
+    private val dateFormat =
         SimpleDateFormat(context.getString(R.string.pattern_date_format), Locale.ENGLISH)
 
     fun from(): String {
-        return simpleDateFormat.format(
+        return dateFormat.format(
             Calendar.getInstance().apply {
                 add(Calendar.DATE, DAYS_AGO)
             }.time
@@ -21,6 +21,6 @@ class DateNews(context: Context) {
     }
 
     fun to(): String {
-        return simpleDateFormat.format(Date())
+        return dateFormat.format(Date())
     }
 }
