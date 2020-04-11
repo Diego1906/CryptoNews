@@ -2,6 +2,7 @@ package br.com.cryptonews.ui
 
 import android.os.Bundle
 import android.view.*
+import androidx.core.view.isEmpty
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -46,12 +47,15 @@ class NewsFragment : Fragment() {
             it?.onShowToast(requireContext())
         })
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         if (filterTitle.isNullOrEmpty()) {
             filterTitle = QueryType.SHOW_ALL.value
             onShowData(filterTitle)
         }
-
-        return binding.root
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -73,22 +77,27 @@ class NewsFragment : Fragment() {
     }
 
     private fun onShowData(title: String?) {
-        if (!onIsNetworkConnected()) {
-            viewModel.onShowToast(getString(R.string.no_connection_internet))
-            onHideRefresh()
+        if (onConnected().not())
             return
-        }
 
-        viewModel.onShowProgressBar(true)
         title?.let {
             viewModel.onShowData(it, dateNews.from(), dateNews.to())
         }
+        viewModel.onShowImageNetwork(false)
         onHideRefresh()
     }
 
-    private fun onHideRefresh() {
-        swipeRefresh?.let {
-            swipeRefresh.isRefreshing = false
+    private fun onConnected(): Boolean {
+        if (onIsNetworkConnected().not()) {
+            viewModel.onShowToast(getString(R.string.no_connection_internet))
+            viewModel.onShowImageNetwork(recyclerView.isEmpty())
+            onHideRefresh()
+            return false
         }
+        return true
+    }
+
+    private fun onHideRefresh() {
+        swipeRefresh.isRefreshing = false
     }
 }

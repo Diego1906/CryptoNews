@@ -1,6 +1,7 @@
 package br.com.cryptonews.viewmodel
 
 import android.app.Application
+import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -24,25 +25,22 @@ class NewsViewModel(val repository: IRepository, application: Application) :
     val toast: LiveData<String>
         get() = _toast
 
-    private val _progressBar = MutableLiveData<Boolean>()
-    val progressBar: LiveData<Boolean>
+    private val _progressBar = MutableLiveData(View.GONE)
+    val progressBar: LiveData<Int>
         get() = _progressBar
+
+    private val _imageNoInternetConnected = MutableLiveData(View.GONE)
+    val imageNoInternetConnected: LiveData<Int>
+        get() = _imageNoInternetConnected
 
     override fun onCleared() {
         super.onCleared()
         viewModelScope.cancel()
     }
 
-    fun onShowProgressBar(value: Boolean) {
-        _progressBar.postValue(value)
-    }
-
-    fun onShowToast(value: String?) {
-        _toast.postValue(value)
-    }
-
     fun onShowData(title: String, dateFrom: String, dateTo: String) {
         viewModelScope.launch {
+            onShowProgressBar(true)
             withContext(Dispatchers.IO) {
                 try {
                     _news.postValue(
@@ -58,5 +56,22 @@ class NewsViewModel(val repository: IRepository, application: Application) :
             }
             onShowProgressBar(false)
         }
+    }
+
+    fun onShowToast(value: String?) {
+        _toast.postValue(value)
+    }
+
+    private fun onShowProgressBar(value: Boolean) {
+        _progressBar.postValue(onShow(value))
+    }
+
+    fun onShowImageNetwork(value: Boolean) {
+        _imageNoInternetConnected.value = onShow(value)
+    }
+
+    private fun onShow(value: Boolean) = when (value) {
+        true -> View.VISIBLE
+        else -> View.GONE
     }
 }

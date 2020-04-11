@@ -46,7 +46,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/viewDetail01"
-                    tools:srcCompat="@drawable/ic_news" />
+                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
                 <include
                     android:id="@+id/viewDetail02"
