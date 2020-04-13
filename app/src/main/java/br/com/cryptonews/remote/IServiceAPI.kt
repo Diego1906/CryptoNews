@@ -8,7 +8,7 @@ import retrofit2.http.Query
 interface IServiceAPI {
 
     @GET("everything")
-    suspend fun getRemoteListCryptoNews(
+    suspend fun getListNews(
         @Query("qInTitle") qInTitle: String,
         @Query("from") from: String,
         @Query("to") to: String,

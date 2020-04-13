@@ -33,6 +33,10 @@ class NewsViewModel(val repository: IRepository, application: Application) :
     val imageNoInternetConnected: LiveData<Int>
         get() = _imageNoInternetConnected
 
+    private val _swipeIsRefreshing = MutableLiveData<Boolean>()
+    val swipeIsRefreshing: LiveData<Boolean>
+        get() = _swipeIsRefreshing
+
     override fun onCleared() {
         super.onCleared()
         viewModelScope.cancel()
@@ -41,20 +45,24 @@ class NewsViewModel(val repository: IRepository, application: Application) :
     fun onShowData(title: String, dateFrom: String, dateTo: String) {
         viewModelScope.launch {
             onShowProgressBar(true)
-            withContext(Dispatchers.IO) {
-                try {
-                    _news.postValue(
-                        repository.getRemoteListCryptoNews(title, dateFrom, dateTo)
-                    )
-                } catch (ex: Throwable) {
-                    onShowToast(
-                        getApplication<Application>().getString(
-                            R.string.searching_data_fail, ex.message
-                        )
-                    )
-                }
-            }
+            onCallRepository(title, dateFrom, dateTo)
             onShowProgressBar(false)
+        }
+    }
+
+    private suspend fun onCallRepository(title: String, dateFrom: String, dateTo: String) {
+        withContext(Dispatchers.IO) {
+            try {
+                _news.postValue(
+                    repository.getListNews(title, dateFrom, dateTo)
+                )
+            } catch (ex: Throwable) {
+                onShowToast(
+                    getApplication<Application>().getString(
+                        R.string.searching_data_fail, ex.message
+                    )
+                )
+            }
         }
     }
 
@@ -73,5 +81,9 @@ class NewsViewModel(val repository: IRepository, application: Application) :
     private fun onShow(value: Boolean) = when (value) {
         true -> View.VISIBLE
         else -> View.GONE
+    }
+
+    fun onHideSwipeRefresh() {
+        _swipeIsRefreshing.value = false
     }
 }

@@ -3,6 +3,7 @@ package br.com.cryptonews.util
 import android.content.Context
 import android.net.ConnectivityManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import br.com.cryptonews.CryptoNewsApplication
 import br.com.cryptonews.R
@@ -10,7 +11,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 fun String.onShowToast(context: Context) {
-    Toast.makeText(context, this, Toast.LENGTH_LONG).show()
+    Toast.makeText(context, this, Toast.LENGTH_SHORT).show()
 }
 
 fun String.onDateFormat(): String? {
@@ -38,4 +39,8 @@ fun String.onDateFormat(): String? {
 fun Fragment.onIsNetworkConnected(): Boolean {
     val cm = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     return cm.activeNetworkInfo?.isConnectedOrConnecting == true
+}
+
+fun Fragment.setTitleActionBar(title: String) {
+    (requireActivity() as AppCompatActivity).supportActionBar?.title = title
 }

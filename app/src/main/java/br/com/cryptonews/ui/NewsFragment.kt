@@ -9,17 +9,15 @@ import androidx.navigation.fragment.findNavController
 import br.com.cryptonews.R
 import br.com.cryptonews.databinding.FragmentNewsBinding
 import br.com.cryptonews.ui.adapter.ListNewsAdapter
-import br.com.cryptonews.util.DateNews
-import br.com.cryptonews.util.QueryType
-import br.com.cryptonews.util.onIsNetworkConnected
-import br.com.cryptonews.util.onShowToast
+import br.com.cryptonews.util.*
 import br.com.cryptonews.viewmodel.NewsViewModel
 import kotlinx.android.synthetic.main.fragment_news.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 class NewsFragment : Fragment() {
 
-    private var filterTitle: String? = null
+    private var filterTitle: String = ""
     private val viewModel: NewsViewModel by viewModel()
     private val dateNews by lazy { DateNews(requireContext()) }
     private val adapterNews by lazy {
@@ -47,16 +45,24 @@ class NewsFragment : Fragment() {
             it?.onShowToast(requireContext())
         })
 
+        viewModel.swipeIsRefreshing.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                swipeRefresh.isRefreshing = it
+            }
+        })
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (filterTitle.isNullOrEmpty()) {
+
+        if (filterTitle.isEmpty()) {
             filterTitle = QueryType.SHOW_ALL.value
             onShowData(filterTitle)
         }
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -76,28 +82,24 @@ class NewsFragment : Fragment() {
         return true
     }
 
-    private fun onShowData(title: String?) {
+    private fun onShowData(title: String) {
+        setTitleActionBar(title.toUpperCase(Locale.getDefault()))
+
         if (onConnected().not())
             return
 
-        title?.let {
-            viewModel.onShowData(it, dateNews.from(), dateNews.to())
-        }
+        viewModel.onHideSwipeRefresh()
         viewModel.onShowImageNetwork(false)
-        onHideRefresh()
+        viewModel.onShowData(title, dateNews.from(), dateNews.to())
     }
 
     private fun onConnected(): Boolean {
         if (onIsNetworkConnected().not()) {
-            viewModel.onShowToast(getString(R.string.no_connection_internet))
+            viewModel.onHideSwipeRefresh()
             viewModel.onShowImageNetwork(recyclerView.isEmpty())
-            onHideRefresh()
+            viewModel.onShowToast(getString(R.string.no_connection_internet))
             return false
         }
         return true
-    }
-
-    private fun onHideRefresh() {
-        swipeRefresh.isRefreshing = false
     }
 }
