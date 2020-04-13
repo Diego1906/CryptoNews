@@ -8,6 +8,7 @@ import br.com.cryptonews.remote.dto.News
 import br.com.cryptonews.remote.dto.Source
 import br.com.cryptonews.util.onDateFormat
 
+//TODO Alterar para um nome mais claro, ex: MappersResponse
 fun News.mapToModel() = NewsModel(
     status = this.status,
     totalResults = this.totalResults,
