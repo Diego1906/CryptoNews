@@ -1,3 +1,22 @@
 <resources>
-    <string name="app_name">CryptoNews</string>
+    <string name="app_name">Crypto News</string>
+    <string name="date">Date</string>
+    <string name="title">Title</string>
+    <string name="all_about_crypto">All about Crypto</string>
+    <string name="bitcoin">Bitcoin</string>
+    <string name="bitcoin_cash">Bitcoin Cash</string>
+    <string name="ethereum">Ethereum</string>
+    <string name="litecoin">Litecoin</string>
+    <string name="ripple">Ripple</string>
+    <string name="description">Description</string>
+    <string name="author">Author</string>
+    <string name="learn_more">Learn More</string>
+    <string name="image_news_detail">Image news detail</string>
+    <string name="image_news_item">Image news item</string>
+    <string name="no_connection_internet">Sem conexão com a internet</string>
+    <string name="searching_data_fail">Falha ao buscar os dados: %s</string>
+    <string name="pattern_date_format">yyyy-MM-dd</string>
+    <string name="pattern_date_api">yyyy-MM-dd\'T\'HH:mm:ss\'Z\'</string>
+    <string name="pattern_date_pt_br">dd.MM.yyyy HH:mm:ss</string>
+    <string name="time_zone_gmt">GMT</string>
 </resources>

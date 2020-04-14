@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+            android:id="@+id/crypto"
+            android:title="@string/all_about_crypto" />
+        <item
+            android:id="@+id/bitcoin"
+            android:title="@string/bitcoin" />
+        <item
+            android:id="@+id/bitcoinCash"
+            android:title="@string/bitcoin_cash" />
+        <item
+            android:id="@+id/ethereum"
+            android:title="@string/ethereum" />
+        <item
+            android:id="@+id/litecoin"
+            android:title="@string/litecoin" />
+        <item
+            android:id="@+id/ripple"
+            android:title="@string/ripple" />
+    </group>
+</menu>
