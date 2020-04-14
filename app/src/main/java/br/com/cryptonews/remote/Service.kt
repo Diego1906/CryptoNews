@@ -6,14 +6,6 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-//TODO no clean, usa-se interface em aquivo separado, ate mesmo para melhor entendimento do codigo e arquitetura
-
-
-interface IService {
-
-    fun getService(): IServiceAPI
-}
-
 class Service : IService {
 
     private val retrofit: Retrofit

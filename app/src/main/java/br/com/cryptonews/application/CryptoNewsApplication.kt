@@ -1,4 +1,4 @@
-package br.com.cryptonews
+package br.com.cryptonews.application
 
 import android.app.Application
 import android.content.Context
@@ -23,12 +23,13 @@ class CryptoNewsApplication : Application() {
 
         fun setContext(context: Context) {
             synchronized(CryptoNewsApplication::class.java) {
-                if (!::INSTANCE.isInitialized) {
+                if (!Companion::INSTANCE.isInitialized) {
                     INSTANCE = context
                 }
             }
         }
 
-        fun getContext() = INSTANCE
+        fun getContext() =
+            INSTANCE
     }
 }

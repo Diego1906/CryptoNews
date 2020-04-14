@@ -6,9 +6,9 @@ import br.com.cryptonews.remote.IService
 
 class Repository(val service: IService) : IRepository {
 
-    override suspend fun getListNews(title: String, dateFrom: String, dateTo: String): NewsModel {
+    override suspend fun getListNews(params: Triple<String, String, String>): NewsModel {
         return service.getService()
-            .getListNews(title, dateFrom, dateTo)
+            .getListNews(params.first, params.second, params.third)
             .mapToModel()
     }
 }

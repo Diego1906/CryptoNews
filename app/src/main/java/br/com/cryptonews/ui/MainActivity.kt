@@ -2,7 +2,7 @@ package br.com.cryptonews.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import br.com.cryptonews.CryptoNewsApplication
+import br.com.cryptonews.application.CryptoNewsApplication
 import br.com.cryptonews.R
 
 class MainActivity : AppCompatActivity() {

@@ -37,24 +37,28 @@ class NewsViewModel(val repository: IRepository, application: Application) :
     val swipeIsRefreshing: LiveData<Boolean>
         get() = _swipeIsRefreshing
 
+    private val _titleActionBar = MutableLiveData<String>()
+    val titleActionBar: LiveData<String>
+        get() = _titleActionBar
+
     override fun onCleared() {
         super.onCleared()
         viewModelScope.cancel()
     }
 
-    fun onShowData(title: String, dateFrom: String, dateTo: String) {
+    fun onShowData(params: Triple<String, String, String>) {
         viewModelScope.launch {
             onShowProgressBar(true)
-            onCallRepository(title, dateFrom, dateTo)
+            onCallRepository(params)
             onShowProgressBar(false)
         }
     }
 
-    private suspend fun onCallRepository(title: String, dateFrom: String, dateTo: String) {
+    private suspend fun onCallRepository(params: Triple<String, String, String>) {
         withContext(Dispatchers.IO) {
             try {
                 _news.postValue(
-                    repository.getListNews(title, dateFrom, dateTo)
+                    repository.getListNews(params)
                 )
             } catch (ex: Throwable) {
                 onShowToast(
@@ -85,5 +89,9 @@ class NewsViewModel(val repository: IRepository, application: Application) :
 
     fun onHideSwipeRefresh() {
         _swipeIsRefreshing.value = false
+    }
+
+    fun onSetTitleActionBar(value: String) {
+        _titleActionBar.value = value
     }
 }

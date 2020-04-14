@@ -10,8 +10,8 @@ interface IServiceAPI {
     @GET("everything")
     suspend fun getListNews(
         @Query("qInTitle") qInTitle: String,
-        @Query("from") from: String,
-        @Query("to") to: String,
+        @Query("from") dateFrom: String,
+        @Query("to") dateTo: String,
         @Query("sortBy") sortBy: String = "publishedAt",
         @Query("apiKey") apiKey: String = BuildConfig.API_KEY
     ): News

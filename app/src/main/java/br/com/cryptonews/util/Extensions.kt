@@ -5,7 +5,7 @@ import android.net.ConnectivityManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import br.com.cryptonews.CryptoNewsApplication
+import br.com.cryptonews.application.CryptoNewsApplication
 import br.com.cryptonews.R
 import java.text.SimpleDateFormat
 import java.util.*

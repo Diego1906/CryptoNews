@@ -51,6 +51,12 @@ class NewsFragment : Fragment() {
             }
         })
 
+        viewModel.titleActionBar.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                setTitleActionBar(it.toUpperCase(Locale.getDefault()))
+            }
+        })
+
         return binding.root
     }
 
@@ -62,7 +68,6 @@ class NewsFragment : Fragment() {
             onShowData(filterTitle)
         }
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -83,14 +88,14 @@ class NewsFragment : Fragment() {
     }
 
     private fun onShowData(title: String) {
-        setTitleActionBar(title.toUpperCase(Locale.getDefault()))
+        viewModel.onSetTitleActionBar(title)
 
         if (onConnected().not())
             return
 
         viewModel.onHideSwipeRefresh()
         viewModel.onShowImageNetwork(false)
-        viewModel.onShowData(title, dateNews.from(), dateNews.to())
+        viewModel.onShowData(Triple(title, dateNews.from(), dateNews.to()))
     }
 
     private fun onConnected(): Boolean {
