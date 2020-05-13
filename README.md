@@ -1,6 +1,6 @@
 # App Crypto News
 
-O aplicativo consome uma API REST para buscar os dados referente as notícias do mundo de cripto moedas.
+O aplicativo consome uma API REST para buscar os dados referentes as notícias do mundo de cripto moedas.
 
 O aplicativo possui duas telas sendo uma para consultar as notícias por tipo de moeda e a outra com os detalhes da notícia onde é possível navegar até o site oficial.
 
