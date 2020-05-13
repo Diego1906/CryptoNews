@@ -2,19 +2,19 @@
 
 O aplicativo consome uma API REST para buscar os dados referentes as notícias do mundo de cripto moedas.
 
-O aplicativo possui duas telas sendo uma para consultar as notícias por tipo de moeda e a outra com os detalhes da notícia onde é possível navegar até o site oficial.
-
 A API utilizada foi a [NewsAPI](https://newsapi.org/)
 
+**O aplicativo possui duas telas e elas são:**
+  - 1º Tela para consultar as notícias por tipo de moeda selecionada ou todos os tipos de cripto moedas;
+  - 2º Tela para visualizar os detalhes da notícia selecionada. Nessa tela é possível navegar até o site oficial.
 
 **No desenvolvimento do projeto foram utilizadas as tecnologias descritas abaixo**
-
 
 - Linguagem de Programação
   - 
   - Kotlin
 
-- Componentes de Arquitetura
+- Componentes de Arquitetura e Android Jetpack
   -
   - Documentação
     - 
@@ -24,6 +24,8 @@ A API utilizada foi a [NewsAPI](https://newsapi.org/)
     - [DataBinding](https://developer.android.com/topic/libraries/data-binding)
     - [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle)
     - [Coroutines](https://developer.android.com/topic/libraries/architecture/coroutines)
+    - [Fragments](https://developer.android.com/guide/components/fragments)
+    - [Android KTX](https://developer.android.com/kotlin/ktx)
     
 - Bibliotecas Externas
   - 
@@ -40,3 +42,4 @@ A API utilizada foi a [NewsAPI](https://newsapi.org/)
 - Design de Arquitetura
   - 
   - [MVVM](https://medium.com/involves-rocks/observa%C3%A7%C3%B5es-sobre-mvp-mvvm-e-outras-letras-c00656058f44) é o padrão de design de arquitetura de software que a Google indica para os novos desenvolvimento. Os novos componentes de arquitetura já são lançados com suporte a esse tipo de padrão 
+  - [Repository](https://proandroiddev.com/the-real-repository-pattern-in-android-efba8662b754) é estratégia para abstrair o acesso aos dados. Ele é composto pelo código em uma aplicação que lida com o armazenamento e a recuperação de dados. [Mais detalhes](https://makingloops.com/why-should-you-use-the-repository-pattern/).
