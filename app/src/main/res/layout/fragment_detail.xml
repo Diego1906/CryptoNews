@@ -48,7 +48,7 @@
                 android:id="@+id/titleDetail"
                 style="@style/StyleTitle"
                 android:layout_width="@dimen/dimen_0dp"
-                android:layout_height="@dimen/dimen_44dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_16dp"
                 android:layout_marginBottom="@dimen/dimen_16dp"
                 android:text="@{viewModel.article.title}"
