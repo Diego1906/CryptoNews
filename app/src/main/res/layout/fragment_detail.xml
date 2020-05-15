@@ -23,92 +23,94 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="@dimen/dimen_8dp" />
+                app:layout_constraintGuide_begin="@dimen/dimen_16dp" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideEnd"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                app:layout_constraintGuide_end="@dimen/dimen_8dp" />
-
-            <TextView
-                android:id="@+id/textTitleDetail"
-                style="@style/StyleTextTitle"
-                android:text="@{viewModel.article.title}"
-                app:layout_constraintEnd_toEndOf="@id/guideEnd"
-                app:layout_constraintStart_toStartOf="@id/guideBegin"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="As moedas digitais estão sacudinho o mundo e o mercado de compra e venda" />
+                app:layout_constraintGuide_end="@dimen/dimen_16dp" />
 
             <ImageView
                 android:id="@+id/imageDetail"
-                style="@style/StyleImage"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_250dp"
                 android:contentDescription="@string/image_news_detail"
+                android:scaleType="centerCrop"
                 app:downloadImage="@{viewModel.article.urlToImage}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textTitleDetail"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             <TextView
-                android:id="@+id/textDescriptionDetail"
+                android:id="@+id/titleDetail"
+                style="@style/StyleTitle"
                 android:layout_width="@dimen/dimen_0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_8dp"
-                android:ellipsize="end"
-                android:gravity="start"
-                android:maxLines="5"
-                android:padding="@dimen/dimen_4dp"
-                android:text="@{viewModel.article.description}"
-                android:textColor="@color/colorGray700"
-                android:textSize="@dimen/dimen_16sp"
+                android:layout_height="@dimen/dimen_44dp"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:layout_marginBottom="@dimen/dimen_16dp"
+                android:text="@{viewModel.article.title}"
                 app:layout_constraintEnd_toEndOf="@id/guideEnd"
                 app:layout_constraintStart_toStartOf="@id/guideBegin"
                 app:layout_constraintTop_toBottomOf="@id/imageDetail"
-                tools:text="As moedas digitais estão sacudinho o mundo e o mercado de compra e venda." />
+                tools:text="@string/text_tools" />
+
+            <TextView
+                android:id="@+id/descriptionDetail"
+                style="@style/StyleDescription"
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_24dp"
+                android:text="@{viewModel.article.description}"
+                app:layout_constraintEnd_toEndOf="@id/guideEnd"
+                app:layout_constraintStart_toStartOf="@id/guideBegin"
+                app:layout_constraintTop_toBottomOf="@id/titleDetail"
+                tools:text="@string/text_tools" />
 
             <TextView
                 android:id="@+id/labelAuthorDetail"
                 android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_6dp"
+                android:layout_marginTop="@dimen/dimen_16dp"
                 android:gravity="start"
-                android:padding="@dimen/dimen_4dp"
                 android:text="@string/author"
                 android:textColor="@android:color/black"
                 android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="@id/guideEnd"
                 app:layout_constraintStart_toStartOf="@id/guideBegin"
-                app:layout_constraintTop_toBottomOf="@id/textDescriptionDetail" />
+                app:layout_constraintTop_toBottomOf="@id/descriptionDetail" />
 
             <include
                 android:id="@+id/viewAuthorDetail"
-                style="@style/StyleIncludeView"
                 layout="@layout/view_separator"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@id/guideEnd"
+                app:layout_constraintStart_toStartOf="@id/guideBegin"
                 app:layout_constraintTop_toBottomOf="@id/labelAuthorDetail" />
 
             <TextView
-                android:id="@+id/textAuthorDetail"
+                android:id="@+id/descriptionAuthorDetail"
                 android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:gravity="start"
-                android:padding="@dimen/dimen_4dp"
                 android:text="@{viewModel.article.author}"
                 android:textColor="@color/colorGray700"
                 app:layout_constraintEnd_toEndOf="@id/guideEnd"
                 app:layout_constraintStart_toStartOf="@id/guideBegin"
                 app:layout_constraintTop_toBottomOf="@id/viewAuthorDetail"
-                tools:text="Autor desconhecido" />
+                tools:text="@string/text_tools_author" />
 
             <Button
                 android:id="@+id/buttonLearnMore"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_64dp"
-                android:layout_margin="@dimen/dimen_12dp"
+                android:layout_marginStart="@dimen/dimen_16dp"
+                android:layout_marginTop="@dimen/dimen_24dp"
+                android:layout_marginEnd="@dimen/dimen_16dp"
+                android:layout_marginBottom="@dimen/dimen_16dp"
                 android:background="@drawable/gradient_normal"
                 android:clickable="true"
                 android:focusable="true"
@@ -116,9 +118,9 @@
                 android:text="@string/learn_more"
                 android:textColor="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintEnd_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textAuthorDetail" />
+                app:layout_constraintEnd_toEndOf="@id/guideEnd"
+                app:layout_constraintEnd_toStartOf="@id/guideBegin"
+                app:layout_constraintTop_toBottomOf="@id/descriptionAuthorDetail" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

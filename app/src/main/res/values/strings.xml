@@ -19,4 +19,8 @@
     <string name="pattern_date_api">yyyy-MM-dd\'T\'HH:mm:ss\'Z\'</string>
     <string name="pattern_date_pt_br">dd.MM.yyyy HH:mm:ss</string>
     <string name="time_zone_gmt">GMT</string>
+    <string name="not_reported">Not reported</string>
+    <string name="text_tools">As moedas digitais estão sacudinho o mundo e o mercado de compra e venda.</string>
+    <string name="text_tools_author">Author desconhecido</string>
+    <string name="text_tools_date">10.03.2020 21:51:03</string>
 </resources>

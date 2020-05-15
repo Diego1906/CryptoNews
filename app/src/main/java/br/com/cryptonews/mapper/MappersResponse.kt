@@ -7,6 +7,7 @@ import br.com.cryptonews.remote.dto.Article
 import br.com.cryptonews.remote.dto.News
 import br.com.cryptonews.remote.dto.Source
 import br.com.cryptonews.util.onDateFormat
+import br.com.cryptonews.util.onNotReported
 
 fun News.mapToModel() = NewsModel(
     status = this.status,
@@ -18,13 +19,13 @@ fun News.mapToModel() = NewsModel(
 
 fun Article.mapToModel() = ArticleModel(
     source = this.source?.mapToModel(),
-    author = this.author,
-    title = this.title,
-    description = this.description,
+    author = this.author.onNotReported(),
+    title = this.title.onNotReported(),
+    description = this.description.onNotReported(),
     url = this.url,
     urlToImage = this.urlToImage,
-    publishedAt = this.publishedAt?.onDateFormat(),
-    content = this.content
+    publishedAt = this.publishedAt.onDateFormat(),
+    content = this.content?.onNotReported()
 )
 
 fun Source.mapToModel() = SourceModel(

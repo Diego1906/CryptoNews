@@ -10,11 +10,15 @@ import br.com.cryptonews.application.App
 import java.text.SimpleDateFormat
 import java.util.*
 
+fun String?.onNotReported(): String {
+    return this ?: App.getContext().getString(R.string.not_reported)
+}
+
 fun String.onShowToast(context: Context) {
     Toast.makeText(context, this, Toast.LENGTH_SHORT).show()
 }
 
-fun String.onDateFormat(): String? {
+fun String?.onDateFormat(): String? {
     val context = App.getContext()
 
     val dateParser = SimpleDateFormat(
@@ -29,7 +33,9 @@ fun String.onDateFormat(): String? {
         Locale.getDefault()
     )
 
-    val date = dateParser.parse(this)
+    val date = dateParser.parse(
+        this ?: Calendar.getInstance(Locale.getDefault()).time.toString()
+    )
 
     return date?.run {
         dateFormatter.format(this)
@@ -42,5 +48,5 @@ fun Fragment.onIsNetworkConnected(): Boolean {
 }
 
 fun Fragment.setTitleActionBar(title: String) {
-    (requireActivity() as AppCompatActivity).supportActionBar?.title = title
+    (requireActivity() as? AppCompatActivity)?.supportActionBar?.title = title
 }
