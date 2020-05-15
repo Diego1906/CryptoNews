@@ -52,7 +52,7 @@
     <style name="StyleImage">
         <item name="android:layout_marginTop">@dimen/dimen_6dp</item>
         <item name="android:layout_width">@dimen/dimen_0dp</item>
-        <item name="android:scaleType">fitXY</item>
+        <item name="android:scaleType">centerCrop</item>
     </style>
 
 </resources>

@@ -8,7 +8,7 @@
     <dimen name="dimen_8dp">8dp</dimen>
     <dimen name="dimen_12dp">12dp</dimen>
     <dimen name="dimen_64dp">64dp</dimen>
-    <dimen name="dimen_160dp">160dp</dimen>
+    <dimen name="dimen_180dp">180dp</dimen>
     <dimen name="dimen_250dp">250dp</dimen>
 
     <!--SP-->
