@@ -39,15 +39,7 @@
                 app:layout_constraintEnd_toEndOf="@id/guideEnd"
                 app:layout_constraintStart_toStartOf="@id/guideBegin"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="As moedas digitais estão sacudinho o mundo e o mercado de compra e venda." />
-
-            <include
-                android:id="@+id/viewDetail01"
-                style="@style/StyleIncludeView"
-                layout="@layout/view_separator"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textTitleDetail" />
+                tools:text="As moedas digitais estão sacudinho o mundo e o mercado de compra e venda" />
 
             <ImageView
                 android:id="@+id/imageDetail"
@@ -57,61 +49,24 @@
                 app:downloadImage="@{viewModel.article.urlToImage}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/viewDetail01"
+                app:layout_constraintTop_toBottomOf="@id/textTitleDetail"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
-            <include
-                android:id="@+id/viewDetail02"
-                style="@style/StyleIncludeViewWithMarginTop"
-                layout="@layout/view_separator"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageDetail" />
-
-            <TextView
-                android:id="@+id/textDateDetail"
-                style="@style/StyleTextDate"
-                android:text="@{viewModel.article.publishedAt}"
-                app:layout_constraintEnd_toEndOf="@id/guideEnd"
-                app:layout_constraintStart_toStartOf="@id/guideBegin"
-                app:layout_constraintTop_toBottomOf="@id/viewDetail02"
-                tools:text="10.03.2020 21:51:03" />
-
-            <TextView
-                android:id="@+id/labelDescriptionDetail"
-                android:layout_width="@dimen/dimen_0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_6dp"
-                android:gravity="start"
-                android:padding="@dimen/dimen_4dp"
-                android:text="@string/description"
-                android:textColor="@android:color/black"
-                android:textStyle="italic"
-                app:layout_constraintEnd_toEndOf="@id/guideEnd"
-                app:layout_constraintStart_toStartOf="@id/guideBegin"
-                app:layout_constraintTop_toBottomOf="@id/textDateDetail" />
-
-            <include
-                android:id="@+id/viewDescriptionDetail"
-                style="@style/StyleIncludeView"
-                layout="@layout/view_separator"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/labelDescriptionDetail" />
 
             <TextView
                 android:id="@+id/textDescriptionDetail"
                 android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8dp"
                 android:ellipsize="end"
                 android:gravity="start"
                 android:maxLines="5"
                 android:padding="@dimen/dimen_4dp"
                 android:text="@{viewModel.article.description}"
                 android:textColor="@color/colorGray700"
+                android:textSize="@dimen/dimen_16sp"
                 app:layout_constraintEnd_toEndOf="@id/guideEnd"
                 app:layout_constraintStart_toStartOf="@id/guideBegin"
-                app:layout_constraintTop_toBottomOf="@id/viewDescriptionDetail"
+                app:layout_constraintTop_toBottomOf="@id/imageDetail"
                 tools:text="As moedas digitais estão sacudinho o mundo e o mercado de compra e venda." />
 
             <TextView

@@ -13,4 +13,6 @@
 
     <!--SP-->
     <dimen name="dimen_16sp">16sp</dimen>
+    <dimen name="dimen_18sp">18sp</dimen>
+    <dimen name="dimen_24sp">24sp</dimen>
 </resources>

@@ -6,30 +6,30 @@ import br.com.cryptonews.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class CryptoNewsApplication : Application() {
+class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
 
         startKoin {
-            androidContext(this@CryptoNewsApplication)
+            androidContext(this@App)
             modules(appModule)
         }
+
+        setContext(applicationContext)
     }
 
     companion object {
-
         private lateinit var INSTANCE: Context
 
-        fun setContext(context: Context) {
-            synchronized(CryptoNewsApplication::class.java) {
-                if (!Companion::INSTANCE.isInitialized) {
+        private fun setContext(context: Context) {
+            synchronized(App::class.java) {
+                if (!::INSTANCE.isInitialized) {
                     INSTANCE = context
                 }
             }
         }
 
-        fun getContext() =
-            INSTANCE
+        fun getContext() = INSTANCE
     }
 }

@@ -5,8 +5,8 @@ import android.net.ConnectivityManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import br.com.cryptonews.application.CryptoNewsApplication
 import br.com.cryptonews.R
+import br.com.cryptonews.application.App
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -15,7 +15,7 @@ fun String.onShowToast(context: Context) {
 }
 
 fun String.onDateFormat(): String? {
-    val context = CryptoNewsApplication.getContext()
+    val context = App.getContext()
 
     val dateParser = SimpleDateFormat(
         context.getString(R.string.pattern_date_api),
